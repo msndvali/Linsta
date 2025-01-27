@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none !important;
+  box-sizing: border-box !important;
+  scroll-behavior: smooth;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: $color-blue-darker;
+}
+
+.form-select {
+  background-color: transparent;
+  color: #fff;
+  --bs-form-select-bg-img: url(/assets/expand-arrow.svg);
+}

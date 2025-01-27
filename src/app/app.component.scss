@@ -1,0 +1,11 @@
+@import 'variables';
+
+main {
+  padding: $padding;
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 875px;
+  }
+}

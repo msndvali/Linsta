@@ -1,0 +1,242 @@
+@import 'variables';
+
+.competitions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $margin;
+
+  &__tabs {
+    cursor: pointer;
+    padding: $padding-sm $padding-lm;
+    color: #fff;
+    border: 1px solid $border-color-blue;
+    border-radius: $border-radius;
+    background-color: $color-blue-dark-2;
+    transition: all 0.15s ease-in-out;
+
+    &:hover, &.active {
+      border-color: $color-green-1 !important;
+      background-color: $color-green-transparent;
+    }
+  }
+}
+
+.matches {
+  display: flex;
+  flex-direction: column;
+  gap: $margin;
+
+  &__list {
+    padding: $padding-lm;
+    border-radius: $border-radius;
+    background-color: $color-blue-dark-2;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    &__item {
+      color: #fff;
+      cursor: pointer;
+      border: 1px solid transparent;
+      padding: $padding-sm $padding;
+      border-radius: $border-radius;
+      transition: all 0.15s ease-in-out;
+
+      &.active {
+        background-color: $color-blue-darker !important;
+        border: 1px solid $color-green-1 !important;
+      }
+
+      &:hover {
+        border: 1px solid $border-color-blue;
+        background-color: $color-blue-dark-2;
+      }
+
+      &__time {
+        span {
+          color: $color-green-1;
+        }
+      }
+    }
+  }
+
+  &__selected {
+    width: 100%;
+    padding: $padding-lm;
+    border-radius: $border-radius;
+    background-color: $color-blue-dark-2;
+
+    &__top {
+      display: flex;
+      justify-content: space-between;
+      gap: $margin;
+
+      .form-select {
+        width: 350px;
+      }
+    }
+
+    &__filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $margin;
+
+      &__radio {
+        input {
+          display: none;
+        }
+
+        label {
+          cursor: pointer;
+          padding: $padding-sm $padding;
+          font-size: $font-size-sx;
+          color: #fff;
+          border: 1px solid $border-color-blue;
+          border-radius: $border-radius;
+          background-color: $color-blue-dark-2;
+          transition: all 0.15s ease-in-out;
+
+          &:hover, &.active {
+            border-color: $color-green-1 !important;
+            background-color: $color-green-transparent;
+          }
+        }
+      }
+    }
+
+    &__lines {
+      &__line {
+        border-bottom: 1px dashed #ffffff1a;
+        padding-bottom: $padding-lg;
+        margin-bottom: $margin-lg;
+
+        &-name {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          color: #fff;
+          width: 100%;
+          margin-bottom: $margin-ms;
+          font-size: $font-size-lm;
+        }
+
+        &-cards {
+          display: flex;
+          gap: $margin;
+        }
+
+        &-card {
+          width: 50%;
+
+          table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            background-color: $color-blue-dark-1;
+
+            thead {
+              tr {
+                th {
+                  text-align: center;
+                  border: 1px solid #ffffff1a;
+                  color: #fff;
+                  padding: $padding-xs $padding;
+                  font-weight: normal;
+                  font-size: 14px;
+
+                  b.team {
+                    color: $color-green-1;
+                  }
+                }
+              }
+            }
+            tbody {
+              tr {
+                td {
+                  text-align: center;
+                  border: 1px solid #ffffff1a;
+                  color: $color-grey-1;
+                  padding: $padding-xs $padding;
+
+                  &.percentage {
+                    color: $color-green-1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// @media (min-width: 992px) {
+//   .competitions {
+//     display: flex;
+//   }
+
+//   .accordion {
+//     display: none;
+//   }
+// }
+
+@media (max-width: 992px) {
+  // .competitions {
+  //   display: none;
+  // }
+
+  // .accordion {
+  //   display: block;
+  // }
+
+  .competitions {
+    gap: $margin-sm;
+    justify-content: start;
+
+    &__tabs {
+      padding: $padding-sm $padding;
+    }
+  }
+
+  .matches {
+    &__selected {
+      &__top {
+        flex-direction: column;
+
+        .form-select {
+          width: 100%;
+        }
+      }
+
+      &__filter {
+        gap: $margin-ms;
+
+        &__radio {
+          label {
+            font-size: $font-size-xs;
+          }
+        }
+      }
+
+      &__lines {
+        &__line {
+          &-name {
+            font-size: $font-size;
+          }
+        }
+
+        &__line-cards {
+          flex-direction: column;
+        }
+
+        &__line-card {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
