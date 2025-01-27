@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{Ba as m,Ta as n,h as o,o as r}from"./chunk-V2EO6222.mjs";import"./chunk-VVCT4QZE.mjs";var a=[{path:"",loadChildren:()=>import("./chunk-B2SAJUWD.mjs").then(e=>e.DashboardModule)}],s=(()=>{let t=class t{};t.\u0275fac=function(i){return new(i||t)},t.\u0275mod=r({type:t}),t.\u0275inj=o({imports:[n.forChild(a),n]});let e=t;return e})();var M=(()=>{let t=class t{};t.\u0275fac=function(i){return new(i||t)},t.\u0275mod=r({type:t}),t.\u0275inj=o({imports:[m,s]});let e=t;return e})();export{M as LayoutModule};
