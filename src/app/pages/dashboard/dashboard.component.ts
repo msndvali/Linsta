@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
   public filteredLines: ILine[];
   public lineTypes: ILineType[];
   public selectedLineTypeId: number;
+  public searchLinesInputValue: string;
 
   constructor(
     private competitionsService: CompetitionsService,
@@ -53,8 +54,9 @@ export class DashboardComponent implements OnInit {
     this.numberOfLastMatchesFilter = numberOfLastMatchesFilter;
     this.lines = testArray;
     this.filteredLines = testArray;
-    this.lineTypes = testArray2;
+    this.lineTypes = [];
     this.selectedLineTypeId = 1;
+    this.searchLinesInputValue = '';
   }
 
   private getCompetitions(): void {
@@ -142,7 +144,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public onSeachLinesInput(event: Event): void {
-    const value: string = (event.target as HTMLInputElement).value;
+    this.searchLinesInputValue = (event.target as HTMLInputElement).value;
 
     if (this.debounceSearchLinesTimer) {
       clearTimeout(this.debounceSearchLinesTimer);
@@ -150,7 +152,7 @@ export class DashboardComponent implements OnInit {
 
     const filterLines = (): void => {
       this.filteredLines = this.lines.filter((line: ILine): boolean => {
-        return line.lineName.includes(value);
+        return line.lineName.includes(this.searchLinesInputValue);
       });
     };
 
@@ -171,7 +173,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.filteredLines = this.lines.filter((line: ILine): boolean => {
-      return line.lineTypeIds.includes(this.selectedLineTypeId);
+      return line.lineTypeIds.includes(this.selectedLineTypeId) && line.lineName.includes(this.searchLinesInputValue);
     });
   }
 
