@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   public lineTypes: ILineType[];
   public selectedLineTypeId: number;
   public searchLinesInputValue: string;
+  public isSelectedMatchLinesLoading: boolean;
 
   constructor(
     private competitionsService: CompetitionsService,
@@ -52,11 +53,12 @@ export class DashboardComponent implements OnInit {
     this.selectedMatchId = null;
     this.numberOfLastMatchesFilterControl = new FormControl('Last10');
     this.numberOfLastMatchesFilter = numberOfLastMatchesFilter;
-    this.lines = testArray;
-    this.filteredLines = testArray;
+    this.lines = [];
+    this.filteredLines = [];
     this.lineTypes = [];
     this.selectedLineTypeId = 1;
     this.searchLinesInputValue = '';
+    this.isSelectedMatchLinesLoading = false;
   }
 
   private getCompetitions(): void {
@@ -66,6 +68,8 @@ export class DashboardComponent implements OnInit {
 
     const onGetCompetitionsSuccess = (response: ICompetition[]): void => {
       this.competitions = response;
+
+      this.onCompetitionSelected(this.competitions[0].name);
     };
 
     this.competitionsService.getCompetitions(1)
@@ -98,7 +102,15 @@ export class DashboardComponent implements OnInit {
 
     const onGetLinesLiveSuccess = (response: ILine[]): void => {
       this.lines = response;
+      this.filteredLines = response;
+
+      this.isSelectedMatchLinesLoading = false;
     };
+
+    this.lines = [];
+    this.filteredLines = [];
+
+    this.isSelectedMatchLinesLoading = true;
 
     const filterData: any = {
       matchId: this.selectedMatchId,

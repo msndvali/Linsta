@@ -27,7 +27,6 @@
   <div *ngIf="selectedMatchIndex !== null" class="matches__selected">
     <div class="matches__selected__top mb-4">
       <input type="text" placeholder="მოძებნე პოზიცია..." class="form-select" (input)="onSeachLinesInput($event)">
-
       <select class="form-select" [formControl]="numberOfLastMatchesFilterControl" (change)="onNumberOfLastMatchesFilterChanged()">
         <option
           *ngFor="let number of numberOfLastMatchesFilter | keyvalue"
@@ -49,51 +48,56 @@
         </label>
       </div>
     </div>
-    <div class="matches__selected__lines">
-      <div *ngFor="let line of filteredLines" class="matches__selected__lines__line">
-        <div class="matches__selected__lines__line-name">
-          {{ line.lineName }}
-        </div>
-        <div class="matches__selected__lines__line-cards">
-          <div class="matches__selected__lines__line-card">
-            <table>
-              <thead>
-                <tr>
-                  <th><b class="team">{{ line.homeTeamName }}:</b> <br> სახლში/სტუმრად</th>
-                  <th><b class="team">{{ line.awayTeamName }}:</b> <br> სახლში/სტუმრად</th>
-                  <th><b>საშუალო</b></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{ line.homeTeamTotalMatches }}/{{ line.homeTeamTotalLinePassed }} {{ line.homeTeamTotalPercent | number: '1.0-0' }}%</td>
-                  <td>{{ line.awayTeamTotalMatches }}/{{ line.awayTeamTotalLinePassed }} {{ line.awayTeamTotalPercent | number: '1.0-0' }}%</td>
-                  <td class="percentage">{{ line.averageTotalPercent | number: '1.0-0' }}%</td>
-                </tr>
-              </tbody>
-            </table>
+    <ng-container *ngIf="lines.length > 0 else noMatchLines">
+      <div class="matches__selected__lines">
+        <div *ngFor="let line of filteredLines" class="matches__selected__lines__line">
+          <div class="matches__selected__lines__line-name">
+            {{ line.lineName }}
           </div>
-          <div class="matches__selected__lines__line-card">
-            <table>
-              <thead>
-                <tr>
-                  <th><b class="team">{{ line.homeTeamName }}:</b> <br> სახლში</th>
-                  <th><b class="team">{{ line.awayTeamName }}:</b> <br> სტუმრად</th>
-                  <th><b>საშუალო</b></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{ line.homeTeamInMatches }}/{{ line.homeTeamInLinePassed }} {{ line.homeTeamInPercent | number: '1.0-0' }}%</td>
-                  <td>{{ line.awayTeamOutMatches }}/{{ line.awayTeamOutLinePassed }} {{ line.awayTeamOutPercent | number: '1.0-0' }}%</td>
-                  <td class="percentage">{{ line.averageSingleSidePercent | number: '1.0-0' }}%</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="matches__selected__lines__line-cards">
+            <div class="matches__selected__lines__line-card">
+              <table>
+                <thead>
+                  <tr>
+                    <th><b class="team">{{ line.homeTeamName }}:</b> <br> სახლში/სტუმრად</th>
+                    <th><b class="team">{{ line.awayTeamName }}:</b> <br> სახლში/სტუმრად</th>
+                    <th><b>საშუალო</b></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ line.homeTeamTotalMatches }}/{{ line.homeTeamTotalLinePassed }} {{ line.homeTeamTotalPercent | number: '1.0-0' }}%</td>
+                    <td>{{ line.awayTeamTotalMatches }}/{{ line.awayTeamTotalLinePassed }} {{ line.awayTeamTotalPercent | number: '1.0-0' }}%</td>
+                    <td class="percentage">{{ line.averageTotalPercent | number: '1.0-0' }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="matches__selected__lines__line-card">
+              <table>
+                <thead>
+                  <tr>
+                    <th><b class="team">{{ line.homeTeamName }}:</b> <br> სახლში</th>
+                    <th><b class="team">{{ line.awayTeamName }}:</b> <br> სტუმრად</th>
+                    <th><b>საშუალო</b></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ line.homeTeamInMatches }}/{{ line.homeTeamInLinePassed }} {{ line.homeTeamInPercent | number: '1.0-0' }}%</td>
+                    <td>{{ line.awayTeamOutMatches }}/{{ line.awayTeamOutLinePassed }} {{ line.awayTeamOutPercent | number: '1.0-0' }}%</td>
+                    <td class="percentage">{{ line.averageSingleSidePercent | number: '1.0-0' }}%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-template #noMatchLines>
+      <app-loading [loading]="isSelectedMatchLinesLoading"></app-loading>
+    </ng-template>
   </div>
 </div>
 
